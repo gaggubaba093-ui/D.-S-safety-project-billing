@@ -2,50 +2,60 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>D. S. Safety Project Bill Maker</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#edf2f7;color:#182433;font-family:Arial,sans-serif}
+body{margin:0;background:#eef2f7;font-family:Arial,sans-serif;color:#182433}
 header{background:#102f4f;color:white;text-align:center;padding:22px 10px}
-header h1{margin:0;font-size:28px}
-header p{font-size:12px;letter-spacing:1px}
+header h1{margin:0;font-size:27px}
+header p{font-size:12px}
 main{max-width:950px;margin:20px auto;padding:12px}
-.card{background:white;border-radius:12px;padding:18px;margin-bottom:18px}
+.card{background:white;padding:17px;border-radius:12px;margin-bottom:18px}
 h2{color:#102f4f;font-size:18px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .full{grid-column:1/-1}
-label{display:block;font-weight:bold;font-size:12px;margin-bottom:5px}
-input,textarea,select{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:7px;font-size:14px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #ccd5df;border-radius:7px;font-size:14px}
 textarea{min-height:75px}
-button{padding:12px 15px;margin:8px 5px 0 0;border:0;border-radius:7px;background:#102f4f;color:white;font-weight:bold;cursor:pointer}
-.green{background:#147548}
-.bill{padding:clamp(12px,4vw,28px);border:1px solid #d8e1ea;background:white}
-.brand{text-align:center;font-size:clamp(22px,4vw,32px);font-weight:bold;color:#102f4f}
-.tag{text-align:center;color:#64748b;font-size:12px;margin:8px 0 20px}
-.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f3f7fb;padding:12px;border:1px solid #d8e1ea}
-.section{color:#1c527e;font-weight:bold;margin:22px 0 10px;font-size:13px}
-.customer{border:1px solid #d8e1ea;padding:13px;line-height:1.7;overflow-wrap:anywhere}
+button{padding:11px 13px;border:0;border-radius:7px;background:#102f4f;color:white;font-weight:bold;margin:5px 3px 0 0;cursor:pointer}
+.green{background:#147548}.red{background:#a32b35}.light{background:#e8eef5;color:#102f4f}
+.bill{background:white;padding:20px;border:1px solid #d8e1ea}
+.brand{text-align:center;font-size:28px;font-weight:bold;color:#102f4f}
+.tag{text-align:center;font-size:12px;color:#64748b;margin:8px 0 20px}
+.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f3f7fb;padding:12px}
+.section{font-size:13px;font-weight:bold;color:#1c527e;margin:22px 0 10px}
+.customer{border:1px solid #d8e1ea;padding:12px;line-height:1.7;overflow-wrap:anywhere}
 table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
-th{background:#102f4f;color:white;text-align:left;padding:10px 5px}
+th{background:#102f4f;color:white;padding:10px 5px;text-align:left}
 td{border:1px solid #d8e1ea;padding:10px 5px;overflow-wrap:anywhere}
 .summary{max-width:400px;margin:18px 0 0 auto;background:#f3f7fb}
 .sumrow{display:flex;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #d8e1ea}
-.total{font-weight:bold;font-size:16px;color:#102f4f}
+.total{font-weight:bold;color:#102f4f;font-size:16px}
 .paid{color:#147548;font-weight:bold}
-.words{font-size:12px;margin-top:18px;line-height:1.6}
-.sign{display:flex;justify-content:space-around;gap:15px;margin:60px 0 25px;text-align:center;font-size:12px}
-.sign div{width:45%;border-top:1px solid #777;padding-top:8px}
-.thanks{text-align:center;color:#64748b;margin-top:20px;font-size:12px}
+.words{font-size:12px;margin-top:18px}
+.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.sigbox{border:1px solid #ccd5df;border-radius:8px;padding:10px;min-width:0}
+.sigbox h3{font-size:13px;color:#102f4f;margin:0 0 8px}
+.sigcanvas{display:block;width:100%;height:120px;border:1px dashed #9eafc0;background:white;touch-action:none;border-radius:5px}
+.sigpreview{width:100%;height:120px;object-fit:contain;border:1px dashed #9eafc0;background:white}
+.sigstatus{font-size:11px;color:#64748b;margin:6px 0}
+.thanks{text-align:center;color:#64748b;margin:22px 0 5px;font-size:12px}
 @media(max-width:550px){
-.grid{grid-template-columns:1fr}.full{grid-column:auto}
-.card{padding:12px}table{font-size:10px}th,td{padding:5px 3px}
+ .grid,.sigrow{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .card{padding:12px}
+ .bill{padding:10px}
+ .brand{font-size:22px}
+ table{font-size:10px}
+ th,td{padding:5px 3px}
 }
 @media print{
-body{background:white}
-header,.editor,.preview-title{display:none!important}
-main{margin:0;padding:0}.card{padding:0}
-.bill{border:0}
+ body{background:white}
+ header,.editor,.preview-title,.sigtools{display:none!important}
+ main{margin:0;padding:0}
+ .card{padding:0;box-shadow:none}
+ .bill{border:0}
 }
 </style>
 </head>
@@ -57,54 +67,44 @@ main{margin:0;padding:0}.card{padding:0}
 
 <main>
 <section class="card editor">
-<h2>Professional Bill Maker</h2>
+<h2>Bill Information</h2>
 <div class="grid">
-
 <div>
 <label>Bill Number</label>
 <input id="billNo" placeholder="DS-001">
 </div>
-
 <div>
 <label>Bill Date</label>
 <input id="date" type="date">
 </div>
-
 <div class="full">
 <label>Customer / Company Name</label>
 <input id="customer" value="GreenBuilding Lifescapes LLP">
 </div>
-
 <div class="full">
 <label>Customer Address</label>
 <textarea id="address">1, Heritage House, Near Kamgar Kalyan Bhavan, Gundavali Azad Road, Andheri - East, Mumbai - 400069</textarea>
 </div>
-
 <div class="full">
-<label>GSTIN Number (Optional)</label>
+<label>GSTIN (Optional)</label>
 <input id="gstin" maxlength="15" placeholder="Enter GSTIN number">
 </div>
-
 <div class="full">
 <label>Product Name</label>
 <input id="product" value="Green Bardan Shade Net">
 </div>
-
 <div>
 <label>Size</label>
 <input id="size" value="3 mtr × 50 mtr">
 </div>
-
 <div>
 <label>Quantity (Bundles)</label>
 <input id="qty" type="number" min="0" value="25">
 </div>
-
 <div>
 <label>Rate Per Bundle (₹)</label>
 <input id="rate" type="number" min="0" value="1615">
 </div>
-
 <div>
 <label>Payment Status</label>
 <select id="payment">
@@ -115,10 +115,9 @@ main{margin:0;padding:0}.card{padding:0}
 </select>
 </div>
 </div>
-
 <button onclick="updateBill()">Update Bill</button>
 <button class="green" onclick="downloadBill()">Download Bill Image</button>
-<button onclick="window.print()">Print / Save PDF</button>
+<button class="light" onclick="window.print()">Print / Save PDF</button>
 </section>
 
 <section class="card">
@@ -135,47 +134,55 @@ main{margin:0;padding:0}.card{padding:0}
 <div class="customer">
 <b id="oCustomer"></b><br>
 <span id="oAddress"></span>
-<div id="gstRow" style="display:none">
-<b>GSTIN:</b> <span id="oGstin"></span>
-</div>
+<div id="gstRow" style="display:none"><b>GSTIN:</b> <span id="oGstin"></span></div>
 </div>
 
 <div class="section">ITEM DETAILS</div>
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th>No.</th><th>Product</th><th>Size</th>
 <th>Qty.</th><th>Rate</th><th>Amount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
+</tr></thead>
+<tbody><tr>
 <td>1</td><td id="oProduct"></td><td id="oSize"></td>
 <td id="oQty"></td><td id="oRate"></td><td id="oAmount"></td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
 
 <div class="summary">
-<div class="sumrow total">
-<span>Total Amount</span><span id="oTotal"></span>
+<div class="sumrow total"><span>Total Amount</span><span id="oTotal"></span></div>
+<div class="sumrow"><span>Payment Status</span><span class="paid" id="oPayment"></span></div>
+<div class="sumrow"><span>Balance Due</span><b id="oBalance">₹ 0</b></div>
 </div>
-<div class="sumrow">
-<span>Payment Status</span><span class="paid" id="oPayment"></span>
-</div>
-<div class="sumrow">
-<span>Balance Due</span><b id="oBalance">₹ 0</b>
+
+<div class="words"><b>Amount in Words:</b> <span id="oWords"></span></div>
+
+<div class="sigrow">
+<div class="sigbox">
+<h3>Customer Signature</h3>
+<canvas id="customerCanvas" class="sigcanvas"></canvas>
+<div class="sigstatus" id="customerStatus">Draw signature below or upload an image.</div>
+<div class="sigtools">
+<button type="button" onclick="clearSignature('customer')">Clear</button>
+<label>Upload Signature
+<input type="file" accept="image/*" onchange="uploadSignature(event,'customer')">
+</label>
 </div>
 </div>
 
-<div class="words">
-<b>Amount in Words:</b> <span id="oWords"></span>
+<div class="sigbox">
+<h3>Authorized Signature</h3>
+<canvas id="ownerCanvas" class="sigcanvas"></canvas>
+<div class="sigstatus" id="ownerStatus">Draw signature below or upload an image.</div>
+<div class="sigtools">
+<button type="button" onclick="clearSignature('owner')">Clear</button>
+<label>Upload Signature
+<input type="file" accept="image/*" onchange="uploadSignature(event,'owner')">
+</label>
+</div>
+</div>
 </div>
 
-<div class="sign">
-<div>Customer Signature</div>
-<div>Authorized Signature / Stamp</div>
-</div>
 <div class="thanks">Thank you for your business!</div>
 </div>
 </section>
@@ -183,101 +190,145 @@ main{margin:0;padding:0}.card{padding:0}
 
 <script>
 const $=id=>document.getElementById(id);
+const signatureImages={customer:null,owner:null};
+const touched={customer:false,owner:false};
 
 function money(n){
-return "₹ "+Number(n||0).toLocaleString("en-IN");
+ return "₹ "+Number(n||0).toLocaleString("en-IN");
 }
-
-function formatDate(v){
-if(!v)return "";
-const [y,m,d]=v.split("-");
-return d+"/"+m+"/"+y;
+function dateFormat(v){
+ if(!v)return "";
+ const [y,m,d]=v.split("-");
+ return d+"/"+m+"/"+y;
 }
-
 function words(n){
-const a=["Zero","One","Two","Three","Four","Five","Six",
-"Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen",
-"Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
-const t=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-
-function small(x){
-let s="";
-if(x>=100){s+=a[Math.floor(x/100)]+" Hundred ";x%=100;}
-if(x>=20){s+=t[Math.floor(x/10)]+" ";x%=10;}
-if(x>0)s+=a[x]+" ";
-return s.trim();
+ const a=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+ const t=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+ function small(x){
+  let s="";
+  if(x>=100){s+=a[Math.floor(x/100)]+" Hundred ";x%=100}
+  if(x>=20){s+=t[Math.floor(x/10)]+" ";x%=10}
+  if(x>0)s+=a[x]+" ";
+  return s.trim();
+ }
+ n=Math.floor(Number(n)||0);
+ if(n===0)return "Zero Only";
+ let out=[];
+ for(const [v,name] of [[10000000,"Crore"],[100000,"Lakh"],[1000,"Thousand"],[100,"Hundred"]]){
+  if(n>=v){out.push(small(Math.floor(n/v))+" "+name);n%=v}
+ }
+ if(n)out.push(small(n));
+ return out.join(" ")+" Only";
 }
-
-n=Math.floor(Number(n)||0);
-if(n===0)return "Zero Only";
-
-let out=[];
-[[10000000,"Crore"],[100000,"Lakh"],[1000,"Thousand"],[100,"Hundred"]].forEach(([v,name])=>{
-if(n>=v){out.push(small(Math.floor(n/v))+" "+name);n%=v;}
-});
-if(n)out.push(small(n));
-return out.join(" ")+" Only";
-}
-
 function updateBill(){
-const q=Math.max(0,Number($("qty").value)||0);
-const r=Math.max(0,Number($("rate").value)||0);
-const total=q*r;
-const p=$("payment").value;
-const gst=$("gstin").value.trim();
-
-$("oBill").textContent=$("billNo").value||"________";
-$("oDate").textContent=formatDate($("date").value);
-$("oCustomer").textContent=$("customer").value;
-$("oAddress").textContent=$("address").value;
-$("oGstin").textContent=gst;
-$("gstRow").style.display=gst?"block":"none";
-$("oProduct").textContent=$("product").value;
-$("oSize").textContent=$("size").value;
-$("oQty").textContent=q+" Bundles";
-$("oRate").textContent=money(r);
-$("oAmount").textContent=money(total);
-$("oTotal").textContent=money(total);
-$("oPayment").textContent=p;
-$("oBalance").textContent=p==="UNPAID"?money(total):
-p==="PARTIALLY PAID"?"Confirm balance":"₹ 0";
-$("oWords").textContent="Rupees "+words(total);
+ const q=Math.max(0,Number($("qty").value)||0);
+ const r=Math.max(0,Number($("rate").value)||0);
+ const total=q*r,p=$("payment").value,gst=$("gstin").value.trim();
+ $("oBill").textContent=$("billNo").value||"________";
+ $("oDate").textContent=dateFormat($("date").value);
+ $("oCustomer").textContent=$("customer").value;
+ $("oAddress").textContent=$("address").value;
+ $("oGstin").textContent=gst;
+ $("gstRow").style.display=gst?"block":"none";
+ $("oProduct").textContent=$("product").value;
+ $("oSize").textContent=$("size").value;
+ $("oQty").textContent=q+" Bundles";
+ $("oRate").textContent=money(r);
+ $("oAmount").textContent=money(total);
+ $("oTotal").textContent=money(total);
+ $("oPayment").textContent=p;
+ $("oBalance").textContent=p==="UNPAID"?money(total):
+ p==="PARTIALLY PAID"?"Confirm balance":"₹ 0";
+ $("oWords").textContent="Rupees "+words(total);
 }
 
+// Signature drawing works with finger, stylus or mouse.
+function setupCanvas(id){
+ const canvas=$(id),ctx=canvas.getContext("2d");
+ function resize(){
+  const old=document.createElement("canvas");
+  old.width=canvas.width;old.height=canvas.height;
+  old.getContext("2d").drawImage(canvas,0,0);
+  const had=canvas.width>0&&canvas.height>0;
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=Math.round(rect.width*2);
+  canvas.height=Math.round(rect.height*2);
+  ctx.setTransform(2,0,0,2,0,0);
+  ctx.lineWidth=2;ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#102f4f";
+  if(had)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);
+ }
+ resize();
+ let drawing=false,last=null;
+ function point(e){
+  const r=canvas.getBoundingClientRect();
+  return {x:e.clientX-r.left,y:e.clientY-r.top};
+ }
+ canvas.addEventListener("pointerdown",e=>{
+  if(signatureImages[id==="customerCanvas"?"customer":"owner"])return;
+  drawing=true;last=point(e);canvas.setPointerCapture(e.pointerId);
+  ctx.beginPath();ctx.arc(last.x,last.y,1,0,Math.PI*2);ctx.fill();
+  touched[id==="customerCanvas"?"customer":"owner"]=true;
+ });
+ canvas.addEventListener("pointermove",e=>{
+  if(!drawing)return;
+  const p=point(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;
+ });
+ function stop(){drawing=false;last=null}
+ canvas.addEventListener("pointerup",stop);
+ canvas.addEventListener("pointercancel",stop);
+}
+function clearSignature(who){
+ const canvas=$(who==="customer"?"customerCanvas":"ownerCanvas");
+ const ctx=canvas.getContext("2d");
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ signatureImages[who]=null;touched[who]=false;
+ $(who+"Status").textContent="Draw signature below or upload an image.";
+}
+function uploadSignature(event,who){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/")){alert("Please choose an image file.");return}
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const img=new Image();
+  img.onload=()=>{
+   const canvas=$(who==="customer"?"customerCanvas":"ownerCanvas");
+   const ctx=canvas.getContext("2d");
+   ctx.clearRect(0,0,canvas.width,canvas.height);
+   const scale=Math.min(canvas.width/img.width,canvas.height/img.height);
+   const w=img.width*scale,h=img.height*scale;
+   ctx.drawImage(img,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
+   signatureImages[who]=null;touched[who]=true;
+   $(who+"Status").textContent="Signature image added.";
+  };
+  img.src=reader.result;
+ };
+ reader.readAsDataURL(file);
+}
 function downloadBill(){
-updateBill();
-if(typeof html2canvas==="undefined"){
-const s=document.createElement("script");
-s.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
-s.onload=makeImage;
-s.onerror=()=>alert("Image download ke liye internet check karein.");
-document.head.appendChild(s);
-}else makeImage();
+ updateBill();
+ const script=document.createElement("script");
+ script.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+ script.onload=()=>{
+  html2canvas($("bill"),{scale:2,backgroundColor:"#ffffff",useCORS:true}).then(canvas=>{
+   const a=document.createElement("a");
+   a.download="DS-Safety-Project-Bill.png";
+   a.href=canvas.toDataURL("image/png");
+   a.click();script.remove();
+  }).catch(()=>{script.remove();alert("Download failed. Check internet and try again.")});
+ };
+ script.onerror=()=>alert("Image download needs internet. Please try again online.");
+ document.body.appendChild(script);
 }
-
-function makeImage(){
-html2canvas($("bill"),{scale:2,backgroundColor:"#ffffff"}).then(canvas=>{
-const a=document.createElement("a");
-a.download="DS-Safety-Project-Bill.png";
-a.href=canvas.toDataURL("image/png");
-a.click();
-}).catch(()=>alert("Image download nahi hua. Print / Save PDF try karein."));
-}
-
 const now=new Date();
-$("date").value=now.getFullYear()+"-"+
-String(now.getMonth()+1).padStart(2,"0")+"-"+
-String(now.getDate()).padStart(2,"0");
-
-["billNo","date","customer","address","gstin","product",
-"size","qty","rate","payment"].forEach(id=>{
-$(id).addEventListener("input",updateBill);
-$(id).addEventListener("change",updateBill);
+$("date").value=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+["billNo","date","customer","address","gstin","product","size","qty","rate","payment"].forEach(id=>{
+ $(id).addEventListener("input",updateBill);
+ $(id).addEventListener("change",updateBill);
 });
+setupCanvas("customerCanvas");
+setupCanvas("ownerCanvas");
 updateBill();
-</script>
-<script>
-/* html2canvas is loaded when the image-download button is pressed. */
 </script>
 </body>
 </html>
