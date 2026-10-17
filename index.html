@@ -1,55 +1,51 @@
-
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D. S. Safety Project Bill Maker</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#eef2f5;font-family:Arial,sans-serif;color:#222}
-header{background:#123b5d;color:white;text-align:center;padding:20px}
-header h1{margin:0;font-size:25px}
-header p{font-size:12px}
-main{max-width:900px;margin:20px auto;padding:12px}
-.panel{background:white;padding:16px;border-radius:12px;margin-bottom:18px}
-h2{color:#123b5d;font-size:18px}
+body{margin:0;background:#edf2f7;color:#182433;font-family:Arial,sans-serif}
+header{background:#102f4f;color:white;text-align:center;padding:22px 10px}
+header h1{margin:0;font-size:28px}
+header p{font-size:12px;letter-spacing:1px}
+main{max-width:950px;margin:20px auto;padding:12px}
+.card{background:white;border-radius:12px;padding:18px;margin-bottom:18px}
+h2{color:#102f4f;font-size:18px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:block;font-weight:bold;font-size:13px;margin-bottom:5px}
-input,textarea,select{width:100%;padding:11px;border:1px solid #bbb;border-radius:7px;font-size:15px}
-textarea{min-height:70px}
 .full{grid-column:1/-1}
-button{padding:12px;border:0;border-radius:7px;background:#123b5d;color:white;font-weight:bold;margin:5px 3px;cursor:pointer}
-.green{background:#187044}
-.bill{background:white;padding:20px;border:1px solid #ccd5dc}
-.title{text-align:center;color:#123b5d;font-size:28px;font-weight:bold}
-.sub{text-align:center;color:#555;font-size:12px;margin:8px}
-.top{display:flex;justify-content:space-between;gap:10px;background:#f1f6fa;padding:12px;margin-top:20px;flex-wrap:wrap}
-.section{color:#123b5d;font-weight:bold;margin:22px 0 10px}
-.customer{border:1px solid #b7c9d8;padding:12px;line-height:1.7;overflow-wrap:anywhere}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:#123b5d;color:white}
-th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:anywhere}
-.totals{margin-top:15px;background:#f1f6fa}
-.total{display:flex;justify-content:space-between;padding:13px;border-bottom:1px solid #ccd5dc;gap:10px}
-.words{margin-top:18px;font-size:13px}
-.sign{display:flex;justify-content:space-around;gap:20px;margin:65px 0 25px;text-align:center;color:#123b5d;font-size:12px}
+label{display:block;font-weight:bold;font-size:12px;margin-bottom:5px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:7px;font-size:14px}
+textarea{min-height:75px}
+button{padding:12px 15px;margin:8px 5px 0 0;border:0;border-radius:7px;background:#102f4f;color:white;font-weight:bold;cursor:pointer}
+.green{background:#147548}
+.bill{padding:clamp(12px,4vw,28px);border:1px solid #d8e1ea;background:white}
+.brand{text-align:center;font-size:clamp(22px,4vw,32px);font-weight:bold;color:#102f4f}
+.tag{text-align:center;color:#64748b;font-size:12px;margin:8px 0 20px}
+.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f3f7fb;padding:12px;border:1px solid #d8e1ea}
+.section{color:#1c527e;font-weight:bold;margin:22px 0 10px;font-size:13px}
+.customer{border:1px solid #d8e1ea;padding:13px;line-height:1.7;overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
+th{background:#102f4f;color:white;text-align:left;padding:10px 5px}
+td{border:1px solid #d8e1ea;padding:10px 5px;overflow-wrap:anywhere}
+.summary{max-width:400px;margin:18px 0 0 auto;background:#f3f7fb}
+.sumrow{display:flex;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #d8e1ea}
+.total{font-weight:bold;font-size:16px;color:#102f4f}
+.paid{color:#147548;font-weight:bold}
+.words{font-size:12px;margin-top:18px;line-height:1.6}
+.sign{display:flex;justify-content:space-around;gap:15px;margin:60px 0 25px;text-align:center;font-size:12px}
 .sign div{width:45%;border-top:1px solid #777;padding-top:8px}
-.thanks{text-align:center;color:#555;margin:20px}
-@media(max-width:560px){
- .grid{grid-template-columns:1fr}
- .full{grid-column:auto}
- .bill{padding:10px}
- table{font-size:10px}
- th,td{padding:5px 3px}
- .title{font-size:22px}
+.thanks{text-align:center;color:#64748b;margin-top:20px;font-size:12px}
+@media(max-width:550px){
+.grid{grid-template-columns:1fr}.full{grid-column:auto}
+.card{padding:12px}table{font-size:10px}th,td{padding:5px 3px}
 }
 @media print{
- body{background:white}
- header,.no-print{display:none!important}
- main{margin:0;padding:0}
- .panel{padding:0}
- .bill{border:0}
+body{background:white}
+header,.editor,.preview-title{display:none!important}
+main{margin:0;padding:0}.card{padding:0}
+.bill{border:0}
 }
 </style>
 </head>
@@ -60,41 +56,55 @@ th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:any
 </header>
 
 <main>
-<section class="panel no-print">
-<h2>बिल की जानकारी भरें</h2>
+<section class="card editor">
+<h2>Professional Bill Maker</h2>
 <div class="grid">
+
 <div>
 <label>Bill Number</label>
 <input id="billNo" placeholder="DS-001">
 </div>
+
 <div>
-<label>तारीख</label>
+<label>Bill Date</label>
 <input id="date" type="date">
 </div>
+
 <div class="full">
-<label>Customer Name</label>
+<label>Customer / Company Name</label>
 <input id="customer" value="GreenBuilding Lifescapes LLP">
 </div>
+
 <div class="full">
 <label>Customer Address</label>
 <textarea id="address">1, Heritage House, Near Kamgar Kalyan Bhavan, Gundavali Azad Road, Andheri - East, Mumbai - 400069</textarea>
 </div>
+
+<div class="full">
+<label>GSTIN Number (Optional)</label>
+<input id="gstin" maxlength="15" placeholder="Enter GSTIN number">
+</div>
+
 <div class="full">
 <label>Product Name</label>
 <input id="product" value="Green Bardan Shade Net">
 </div>
+
 <div>
 <label>Size</label>
 <input id="size" value="3 mtr × 50 mtr">
 </div>
+
 <div>
 <label>Quantity (Bundles)</label>
 <input id="qty" type="number" min="0" value="25">
 </div>
+
 <div>
-<label>Rate per Bundle (₹)</label>
+<label>Rate Per Bundle (₹)</label>
 <input id="rate" type="number" min="0" value="1615">
 </div>
+
 <div>
 <label>Payment Status</label>
 <select id="payment">
@@ -106,19 +116,18 @@ th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:any
 </div>
 </div>
 
-<p>कुल रकम अपने आप कैलकुलेट होगी।</p>
 <button onclick="updateBill()">Update Bill</button>
-<button class="green" onclick="downloadImage()">Download Bill Image</button>
+<button class="green" onclick="downloadBill()">Download Bill Image</button>
 <button onclick="window.print()">Print / Save PDF</button>
 </section>
 
-<section class="panel">
+<section class="card">
 <div class="bill" id="bill">
-<div class="title">D. S. SAFETY PROJECT</div>
-<div class="sub">SAFETY NET • SHADE NET • INVISIBLE GRILL</div>
+<div class="brand">D. S. SAFETY PROJECT</div>
+<div class="tag">SAFETY NET • SHADE NET • INVISIBLE GRILL</div>
 
-<div class="top">
-<span><b>Bill No.:</b> <span id="oBill"></span></span>
+<div class="meta">
+<span><b>Bill No:</b> <span id="oBill"></span></span>
 <span><b>Date:</b> <span id="oDate"></span></span>
 </div>
 
@@ -126,6 +135,9 @@ th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:any
 <div class="customer">
 <b id="oCustomer"></b><br>
 <span id="oAddress"></span>
+<div id="gstRow" style="display:none">
+<b>GSTIN:</b> <span id="oGstin"></span>
+</div>
 </div>
 
 <div class="section">ITEM DETAILS</div>
@@ -138,20 +150,22 @@ th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:any
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td id="oProduct"></td>
-<td id="oSize"></td>
-<td id="oQty"></td>
-<td id="oRate"></td>
-<td id="oAmount"></td>
+<td>1</td><td id="oProduct"></td><td id="oSize"></td>
+<td id="oQty"></td><td id="oRate"></td><td id="oAmount"></td>
 </tr>
 </tbody>
 </table>
 
-<div class="totals">
-<div class="total"><b>Total Amount</b><b id="oTotal"></b></div>
-<div class="total"><b>Payment Status</b><b id="oPayment"></b></div>
-<div class="total"><b>Balance Due</b><b id="oBalance">₹ 0</b></div>
+<div class="summary">
+<div class="sumrow total">
+<span>Total Amount</span><span id="oTotal"></span>
+</div>
+<div class="sumrow">
+<span>Payment Status</span><span class="paid" id="oPayment"></span>
+</div>
+<div class="sumrow">
+<span>Balance Due</span><b id="oBalance">₹ 0</b>
+</div>
 </div>
 
 <div class="words">
@@ -168,172 +182,102 @@ th,td{padding:9px 5px;border:1px solid #b7c9d8;text-align:left;overflow-wrap:any
 </main>
 
 <script>
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 function money(n){
- return '₹ ' + Number(n || 0).toLocaleString('en-IN');
+return "₹ "+Number(n||0).toLocaleString("en-IN");
 }
 
-function dateFormat(v){
- if(!v) return '';
- const [y,m,d] = v.split('-');
- return d+'/'+m+'/'+y;
+function formatDate(v){
+if(!v)return "";
+const [y,m,d]=v.split("-");
+return d+"/"+m+"/"+y;
 }
 
 function words(n){
- const ones=['Zero','One','Two','Three','Four','Five','Six',
- 'Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen',
- 'Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
- const tens=['','','Twenty','Thirty','Forty','Fifty',
- 'Sixty','Seventy','Eighty','Ninety'];
+const a=["Zero","One","Two","Three","Four","Five","Six",
+"Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen",
+"Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+const t=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
 
- n=Math.floor(Number(n)||0);
- if(n===0) return 'Zero';
+function small(x){
+let s="";
+if(x>=100){s+=a[Math.floor(x/100)]+" Hundred ";x%=100;}
+if(x>=20){s+=t[Math.floor(x/10)]+" ";x%=10;}
+if(x>0)s+=a[x]+" ";
+return s.trim();
+}
 
- function under1000(x){
-  let s='';
-  if(x>=100){
-   s+=ones[Math.floor(x/100)]+' Hundred ';
-   x%=100;
-  }
-  if(x>=20){
-   s+=tens[Math.floor(x/10)]+' ';
-   x%=10;
-  }
-  if(x>0) s+=ones[x]+' ';
-  return s.trim();
- }
+n=Math.floor(Number(n)||0);
+if(n===0)return "Zero Only";
 
- let out=[];
- const units=[[10000000,'Crore'],[100000,'Lakh'],
- [1000,'Thousand'],[100,'Hundred']];
-
- for(const [v,name] of units){
-  if(n>=v){
-   out.push(under1000(Math.floor(n/v))+' '+name);
-   n%=v;
-  }
- }
- if(n) out.push(under1000(n));
- return out.join(' ')+' Only';
+let out=[];
+[[10000000,"Crore"],[100000,"Lakh"],[1000,"Thousand"],[100,"Hundred"]].forEach(([v,name])=>{
+if(n>=v){out.push(small(Math.floor(n/v))+" "+name);n%=v;}
+});
+if(n)out.push(small(n));
+return out.join(" ")+" Only";
 }
 
 function updateBill(){
- const qty=Math.max(0,Number($('qty').value)||0);
- const rate=Math.max(0,Number($('rate').value)||0);
- const total=qty*rate;
+const q=Math.max(0,Number($("qty").value)||0);
+const r=Math.max(0,Number($("rate").value)||0);
+const total=q*r;
+const p=$("payment").value;
+const gst=$("gstin").value.trim();
 
- $('oBill').textContent=$('billNo').value||'________';
- $('oDate').textContent=dateFormat($('date').value);
- $('oCustomer').textContent=$('customer').value;
- $('oAddress').textContent=$('address').value;
- $('oProduct').textContent=$('product').value;
- $('oSize').textContent=$('size').value;
- $('oQty').textContent=qty+' Bundles';
- $('oRate').textContent=money(rate);
- $('oAmount').textContent=money(total);
- $('oTotal').textContent=money(total);
- $('oPayment').textContent=$('payment').value;
- $('oBalance').textContent=$('payment').value==='UNPAID'
- ? money(total)
- : $('payment').value==='PARTIALLY PAID'
- ? 'Confirm balance'
- : '₹ 0';
- $('oWords').textContent='Rupees '+words(total);
+$("oBill").textContent=$("billNo").value||"________";
+$("oDate").textContent=formatDate($("date").value);
+$("oCustomer").textContent=$("customer").value;
+$("oAddress").textContent=$("address").value;
+$("oGstin").textContent=gst;
+$("gstRow").style.display=gst?"block":"none";
+$("oProduct").textContent=$("product").value;
+$("oSize").textContent=$("size").value;
+$("oQty").textContent=q+" Bundles";
+$("oRate").textContent=money(r);
+$("oAmount").textContent=money(total);
+$("oTotal").textContent=money(total);
+$("oPayment").textContent=p;
+$("oBalance").textContent=p==="UNPAID"?money(total):
+p==="PARTIALLY PAID"?"Confirm balance":"₹ 0";
+$("oWords").textContent="Rupees "+words(total);
 }
 
-function downloadImage(){
- updateBill();
- const b=$('bill');
- const w=1100;
- const h=Math.max(1000,b.scrollHeight+80);
- const canvas=document.createElement('canvas');
- canvas.width=w;
- canvas.height=h;
- const c=canvas.getContext('2d');
- c.fillStyle='white';
- c.fillRect(0,0,w,h);
-
- function txt(t,x,y,size,color,bold=false,align='left'){
-  c.font=(bold?'bold ':'')+size+'px Arial';
-  c.fillStyle=color;
-  c.textAlign=align;
-  c.fillText(t,x,y);
- }
- function line(x,y,x2,y2){
-  c.strokeStyle='#b7c9d8';
-  c.strokeRect(x,y,x2-x,y2-y);
- }
- let y=55;
- txt('D. S. SAFETY PROJECT',w/2,y,34,'#123b5d',true,'center');
- y+=32;
- txt('SAFETY NET • SHADE NET • INVISIBLE GRILL',w/2,y,16,'#555',false,'center');
- y+=55;
- txt('Bill No.: '+($('billNo').value||'________'),55,y,17,'#111',true);
- txt('Date: '+dateFormat($('date').value),w-55,y,17,'#111',true,'right');
- y+=35;
- txt('CUSTOMER DETAILS',55,y,20,'#123b5d',true);
- y+=30;
- txt($('customer').value,65,y,18,'#111',true);
- y+=30;
- const address=$('address').value;
- const max=95;
- for(let i=0;i<address.length;i+=max){
-  txt(address.slice(i,i+max),65,y,15,'#222');
-  y+=24;
- }
- y+=25;
- const headers=['No.','Product','Size','Qty.','Rate','Amount'];
- const values=['1',$('product').value,$('size').value,
- $('qty').value+' Bundles',money($('rate').value),
- money(Number($('qty').value)*Number($('rate').value))];
- const widths=[70,300,180,150,150,145];
- let x=55;
- headers.forEach((v,i)=>{
-  c.fillStyle='#123b5d';
-  c.fillRect(x,y,widths[i],45);
-  txt(v,x+8,y+28,14,'white',true);
-  x+=widths[i];
- });
- y+=45;x=55;
- values.forEach((v,i)=>{
-  line(x,y,x+widths[i],y+70);
-  txt(String(v),x+8,y+28,13,'#111');
-  x+=widths[i];
- });
- y+=100;
- const total=Number($('qty').value)*Number($('rate').value);
- [['Total Amount',money(total)],
- ['Payment Status',$('payment').value],
- ['Balance Due',$('oBalance').textContent]].forEach(r=>{
-  txt(r[0],65,y,18,'#111',true);
-  txt(r[1],w-65,y,18,'#123b5d',true,'right');
-  y+=40;
- });
- y+=20;
- txt('Amount in Words: Rupees '+words(total),55,y,15,'#111');
- y+=90;
- txt('Customer Signature',260,y,15,'#123b5d',false,'center');
- txt('Authorized Signature / Stamp',790,y,15,'#123b5d',false,'center');
- y+=70;
- txt('Thank you for your business!',w/2,y,15,'#555',false,'center');
-
- const a=document.createElement('a');
- a.download='DS-Safety-Project-Bill.png';
- a.href=canvas.toDataURL('image/png');
- a.click();
+function downloadBill(){
+updateBill();
+if(typeof html2canvas==="undefined"){
+const s=document.createElement("script");
+s.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+s.onload=makeImage;
+s.onerror=()=>alert("Image download ke liye internet check karein.");
+document.head.appendChild(s);
+}else makeImage();
 }
 
-const today=new Date();
-$('date').value=today.getFullYear()+'-'+
- String(today.getMonth()+1).padStart(2,'0')+'-'+
- String(today.getDate()).padStart(2,'0');
+function makeImage(){
+html2canvas($("bill"),{scale:2,backgroundColor:"#ffffff"}).then(canvas=>{
+const a=document.createElement("a");
+a.download="DS-Safety-Project-Bill.png";
+a.href=canvas.toDataURL("image/png");
+a.click();
+}).catch(()=>alert("Image download nahi hua. Print / Save PDF try karein."));
+}
 
-['billNo','date','customer','address','product','size',
-'qty','rate','payment'].forEach(id=>{
- $(id).addEventListener('input',updateBill);
+const now=new Date();
+$("date").value=now.getFullYear()+"-"+
+String(now.getMonth()+1).padStart(2,"0")+"-"+
+String(now.getDate()).padStart(2,"0");
+
+["billNo","date","customer","address","gstin","product",
+"size","qty","rate","payment"].forEach(id=>{
+$(id).addEventListener("input",updateBill);
+$(id).addEventListener("change",updateBill);
 });
 updateBill();
+</script>
+<script>
+/* html2canvas is loaded when the image-download button is pressed. */
 </script>
 </body>
 </html>
